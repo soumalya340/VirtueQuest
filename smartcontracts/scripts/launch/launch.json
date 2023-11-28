@@ -1,0 +1,8 @@
+{
+    "contractName" : "VirtueQuest",
+    "constructorParams":{
+            "param1" : 7272,
+            "param2" : "0xD086bacC3883dC499850d964623c459f4698fB96",
+            "param3" : "0x8103B0A8A00be2DDC778e6e7eaa21791Cd364625"
+        }
+}
