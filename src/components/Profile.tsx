@@ -6,7 +6,11 @@ import ProfilePicture from '../../public/profile.png';
 const name = 'Joshua Udo-Udo';
 const wallet = '0xf05D71A2DB4B'; // Assuming a valid wallet address
 
-const Profile: React.FC = () => {
+export interface ProfileProps  {
+  onProfileClick: () => void
+}
+
+const Profile: React.FC<ProfileProps> = ({onProfileClick}) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const handleHover = () => {
@@ -37,7 +41,8 @@ const Profile: React.FC = () => {
 
   return (
     <div
-      className='h-[3.75rem] bg-grad hover:bg-gradtrans lg:h-[2.8125rem] items-center border gap-x-1  rounded-[1.875rem] lg:rounded-[1.41rem] flex p-1'
+      onClick={onProfileClick}
+      className='h-[3.75rem] bg-grad cursor-pointer hover:bg-gradtrans lg:h-[2.8125rem] items-center border gap-x-1  rounded-[1.875rem] lg:rounded-[1.41rem] flex p-1'
       onMouseEnter={handleHover}
       onMouseLeave={handleLeave}
     >
