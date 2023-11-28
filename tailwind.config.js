@@ -6,11 +6,20 @@ module.exports = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    fontFamily: {
+      primary: ['Inter', 'sans-serif'],
+    },
+    screens: {
+      sm: '640px',
+      md: '768px',
+      lg: '1200px',
+      xl: '1728px',
+    },
     extend: {
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        gradient: "url('/cover.png')",
+        grad: 'var(--background-gradient)',
+        gradtrans: 'var(--background-gradient-trans)'
       },
     },
   },
