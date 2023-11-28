@@ -8,6 +8,7 @@ module.exports = {
   theme: {
     fontFamily: {
       primary: ['Inter', 'sans-serif'],
+      analog: ['AnalogFont', 'sans-serif'],
     },
     screens: {
       sm: '640px',
@@ -19,9 +20,21 @@ module.exports = {
       backgroundImage: {
         gradient: "url('/cover.png')",
         grad: 'var(--background-gradient)',
-        gradtrans: 'var(--background-gradient-trans)'
+        gradtrans: 'var(--background-gradient-trans)',
       },
     },
   },
-  plugins: [],
-}
+  plugins: [
+    function ({ addBase, theme }) {
+      addBase({
+        '@font-face': {
+          fontFamily: 'AnalogFont',
+          src: 'url("/fonts/analog-font.ttf") format("truetype")',
+        },
+        body: {
+          fontFamily: theme('fontFamily.analog'),
+        },
+      });
+    },
+  ],
+};

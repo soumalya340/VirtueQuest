@@ -4,6 +4,7 @@ import { useState } from 'react';
 import React from 'react';
 import TopBar from '@/components/TopBar'
 import Menu from '@/components/Menu';
+import GameBoard from '@/components/Board';
 
 const Home = () => {
   const [showProfile, setShowProfile] = useState(false);
@@ -13,11 +14,14 @@ const Home = () => {
   };
 
   return (
-    <div className='bg-gradient bg-cover bg-no-repeat w-full h-screen'>
+    <div className='relative bg-gradient scrollbar-hidden bg-cover bg-no-repeat w-full min-h-screen'>
       <TopBar onProfClick={handleProfileClick} />
+      
+      {/* Use absolute positioning for the Menu */}
+      {showProfile && <div className="absolute top-[4rem] right-0"><Menu /></div>}
 
-      <div className="flex justify-end mr-10">
-        {showProfile && <Menu />}
+      <div className='mt-4'>
+        <GameBoard />
       </div>
     </div>
   );
