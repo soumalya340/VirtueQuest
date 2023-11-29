@@ -19,6 +19,18 @@ const GameBoard = () => {
     return randomNumber;
   };
 
+  const dieNumberToSVG: Record<number, string> = {
+    1: 'Dice-1.svg',
+    2: 'Dice-2.svg',
+    3: 'Dice-3.svg',
+    4: 'Dice-4.svg',
+    5: 'Dice-5.svg',
+    6: 'Dice-6.svg',
+  };
+
+  // Dynamically generate the SVG URL based on the rolled die number
+  const getDieSVGUrl = (number: number) => `/${dieNumberToSVG[number]}`;
+
   return (
     <>
       <div className="flex justify-center items-stretch">
@@ -54,45 +66,53 @@ const GameBoard = () => {
         </div>
       </div>
       <div className="w-fulll flex justify-center">
-        <div className="flex bg-grad h-[7.5rem] lg:h-[5.625rem] w-[37.5rem] lg:w-[28.125rem] justify-center mt-8 gap-6 rounded-[60px] lg:rounded-[45px]">
-          <div>
-            <Button
-              variant={isRollDisabled || gameWon ? "inactive" : "primary"}
-              onClick={() => {
-                const rollResult = getRandomNumber();
-                setDieNumber(rollResult);
-                setIsMoveDisable(false);
-                setIsRollDisable(true);
-              }}
-              disabled={isRollDisabled || gameWon}
-            >
-              {isRollDisabled ? `Roll Die: ${dieNumber}` : "Roll Die"}
-            </Button>
-          </div>
-          <div>
-            <Button
-              variant={isMoveDisabled ? "inactive" : "primary"}
-              onClick={() => {
-                if (dieNumber + playerPosition < 48) {
-                  setPlayerPosition(dieNumber + playerPosition);
-                } else {
-                  setPlayerPosition(48);
-                  setGameWon(true);
-                  enqueueSnackbar("Congratulations!!! You won", {
-                    variant: "success",
-                  });
-                }
-                setIsMoveDisable(true);
-                setIsRollDisable(false);
-              }}
-              disabled={isMoveDisabled || gameWon}
-            >
-              Move
-            </Button>
+        <div className="flex px-[40] lg:px-[30px] bg-grad h-[7.5rem] lg:h-[5.625rem] w-[37.5rem] lg:w-[28.125rem] justify-center mt-8 gap-6 rounded-[60px] lg:rounded-[45px]">
+          <div className="flex w-full items-center justify-between">
+            <div>
+              <Button
+                variant={isRollDisabled || gameWon ? "inactive" : "primary"}
+                onClick={() => {
+                  const rollResult = getRandomNumber();
+                  setDieNumber(rollResult);
+                  setIsMoveDisable(false);
+                  setIsRollDisable(true);
+                }}
+                disabled={isRollDisabled || gameWon}
+              >
+                {isRollDisabled ? <img src={getDieSVGUrl(dieNumber)} className="w-[64px] h-[64px]" alt="die-icon"/> : "Roll Die"}
+              </Button>
+            </div>
+            <div className="flex flex-col justify-center relative font-medium -top-4 lg:-top-3 gap-y-1 items-center">
+              Position
+              <div className="w-[48px] h-[28px] lg:h-[21px] text-[#A8A8A8] text-[1rem] flex items-center justify-center lg:text-[14px] lg:w-[36px] rounded-[5px] bg-[#353535CC]">
+                {playerPosition}
+              </div>
+            </div>
+            <div>
+              <Button
+                variant={isMoveDisabled ? "inactive" : "primary"}
+                onClick={() => {
+                  if (dieNumber + playerPosition < 72) {
+                    setPlayerPosition(dieNumber + playerPosition);
+                  } else {
+                    setPlayerPosition(48);
+                    setGameWon(true);
+                    enqueueSnackbar("Congratulations!!! You won", {
+                      variant: "success",
+                    });
+                  }
+                  setIsMoveDisable(true);
+                  setIsRollDisable(false);
+                }}
+                disabled={isMoveDisabled || gameWon}
+              >
+                Move
+              </Button>
+            </div>
           </div>
         </div>
       </div>
-      
+{/*       
       <div>
         {gameWon ? (
           <div className="text-center mt-8">
@@ -108,7 +128,7 @@ const GameBoard = () => {
             </div>
           </>
         )}
-      </div>
+      </div> */}
     </>
   );
 };
