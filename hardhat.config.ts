@@ -1,12 +1,11 @@
-require("dotenv").config();
 import dotenv from "dotenv"
+require("dotenv").config();
 dotenv.config();
 import "@nomiclabs/hardhat-etherscan"
 import "@nomiclabs/hardhat-truffle5"
 import "@nomiclabs/hardhat-waffle"
 import "hardhat-gas-reporter"
 import "solidity-coverage"
-
 import '@typechain/hardhat'
 import '@nomiclabs/hardhat-ethers'
 
