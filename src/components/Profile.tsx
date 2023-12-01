@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import ProfilePicture from '../../public/profile.png';
 
-const name = 'Joshua Udo-Udo';
+const username = 'Joshua Udo-Udo';
 const wallet = '0xf05D71A2DB4B'; // Assuming a valid wallet address
 
 export interface ProfileProps  {
@@ -21,11 +21,11 @@ const Profile: React.FC<ProfileProps> = ({onProfileClick}) => {
     setIsHovered(false);
   };
 
-  const renderName = () => {
-    if (name.length > 12) {
-      return name.slice(0, 10) + '..';
+  const renderUserName = () => {
+    if (username.length > 12) {
+      return username.slice(0, 10) + '..';
     }
-    return name;
+    return username;
   };
 
   const renderWallet = () => {
@@ -48,7 +48,7 @@ const Profile: React.FC<ProfileProps> = ({onProfileClick}) => {
     >
       <div className='flex-grow w-32 lg:w-24 flex items-center pl-1 justify-center'>
         <h1 className='font-primary font-semibold text-[1rem] lg:text-[14px]'>
-          {isHovered ? renderWallet() : renderName()}
+          {isHovered ? renderWallet() : renderUserName()}
         </h1>
       </div>
       <img

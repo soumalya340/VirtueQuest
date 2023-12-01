@@ -19,6 +19,8 @@ module.exports = {
     extend: {
       backgroundImage: {
         gradient: "url('/cover.png')",
+        board: "url('/board.png')",
+        boardlg: "url('/board-lg.png')",
         grad: 'var(--background-gradient)',
         gradtrans: 'var(--background-gradient-trans)',
       },
