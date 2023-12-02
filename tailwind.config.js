@@ -17,6 +17,9 @@ module.exports = {
       xl: '1728px',
     },
     extend: {
+      colors: {
+        primary: '#37F6AE',
+      },
       backgroundImage: {
         gradient: "url('/cover.png')",
         board: "url('/board.png')",

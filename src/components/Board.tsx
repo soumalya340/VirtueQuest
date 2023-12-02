@@ -40,7 +40,7 @@ const GameBoard = () => {
 
       // Check if the next position is the start of a ladder
       const ladderStartPoints = [3, 8, 13, 19, 33, 36, 37, 50];
-      const ladderEndPoints = [12, 16, 22, 30, 44, 52, 47, 69];
+      const ladderEndPoints = [12, 16, 22, 30, 52, 44, 47, 69];
 
       const ladderIndex = ladderStartPoints.indexOf(nextPosition);
       if (ladderIndex !== -1) {
@@ -65,7 +65,7 @@ const GameBoard = () => {
       setTimeout(() => {
         setIsMoveDisable(true);
         setIsRollDisable(false);
-      }, 1000);
+      }, 500);
     } else {
       setPlayerPosition(72);
       setGameWon(true);
