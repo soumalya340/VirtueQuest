@@ -14,7 +14,7 @@ const Page = () => {
                     <h1 className='font-primary font-extrabold text-[44px] lg:text-[32px]'>VirtueQuest</h1>
                 </div>
                 <div className='flex gap-x-4 lg:gap-x-3'>
-                <button className='w-[10rem] h-4 lg:w-[7.5rem] lg:h-[3rem] bg-black rounded-[1rem] lg:rounded-[0.75rem] text-[#fff] text-[24px] lg:text-[18px] font-bold'>Sign Up</button>
+                <button className='w-[10rem] h-4 lg:w-[7.5rem] lg:h-[3rem] bg-black rounded-[1rem] lg:rounded-[0.75rem] text-[#fff] text-[24px] lg:text-[18px] font-bold'>Login</button>
                     <button className='w-[10rem] h-4 lg:w-[7.5rem] lg:h-[3rem] bg-grad rounded-[1rem] lg:rounded-[0.75rem] text-[#fff] text-[24px] lg:text-[18px] font-bold'>Sign Up</button>
                 </div>
             </div>
