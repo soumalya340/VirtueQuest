@@ -4,6 +4,7 @@ import { useState } from "react";
 import { gameContent } from "@/lib/GameData";
 import { enqueueSnackbar } from "notistack";
 import Button from "./Button";
+import { IoIosEye } from "react-icons/io";
 import Profile from "../../public/profile.png";
 
 const GameBoard = () => {
@@ -12,6 +13,7 @@ const GameBoard = () => {
   const [isMoveDisabled, setIsMoveDisable] = useState<boolean>(true);
   const [isRollDisabled, setIsRollDisable] = useState<boolean>(false);
   const [gameWon, setGameWon] = useState<boolean>(false);
+  const [selectedCell, setSelectedCell] = useState<{ term: string; definition: string } | null>(null);
 
   console.log(dieNumber, playerPosition);
 
@@ -30,9 +32,9 @@ const GameBoard = () => {
     6: 'Dice-6.svg',
   };
 
-  // Dynamically generate the SVG URL based on the rolled die number
   const getDieSVGUrl = (number: number) => `/${dieNumberToSVG[number]}`;
 
+  
   const handleMove = () => {
     if (dieNumber + playerPosition < 72) {
       // Calculate the next position
@@ -44,8 +46,10 @@ const GameBoard = () => {
 
       const ladderIndex = ladderStartPoints.indexOf(nextPosition);
       if (ladderIndex !== -1) {
-        // If the next position is the start of a ladder, set it to the corresponding ladder end point
-        setPlayerPosition(ladderEndPoints[ladderIndex]);
+        // Confirm with the player before climbing the ladder
+        if (window.confirm("You found a ladder! Climb up?")) {
+          setPlayerPosition(ladderEndPoints[ladderIndex]);
+        }
       } else {
         // Check if the next position is the start of a snake
         const snakeStartPoints = [10, 27, 24, 31, 43, 40, 58, 70, 65];
@@ -53,8 +57,10 @@ const GameBoard = () => {
 
         const snakeIndex = snakeStartPoints.indexOf(nextPosition);
         if (snakeIndex !== -1) {
-          // If the next position is the start of a snake, set it to the corresponding snake end point
-          setPlayerPosition(snakeEndPoints[snakeIndex]);
+          // Confirm with the player before sliding down the snake
+          if (window.confirm("Uh-oh! You found a snake. Slide down?")) {
+            setPlayerPosition(snakeEndPoints[snakeIndex]);
+          }
         } else {
           // If the next position is neither a ladder nor a snake, set it normally
           setPlayerPosition(nextPosition);
@@ -75,6 +81,7 @@ const GameBoard = () => {
     }
   };
 
+
   return (
     <>
       <div className="flex justify-center items-stretch">
@@ -86,12 +93,7 @@ const GameBoard = () => {
               .map(({ id, term, definition }) => (
                 <div
                   key={id}
-                  className="h-[3.5rem] w-[7.5rem] lg:w-[5.625rem] border p-[4px] lg:p-[3px] flex justify-between flex-col text-sm cursor-pointer active:border-orange-500 hover:border-[#37F6AE]"
-                  onClick={() => {
-                    enqueueSnackbar(definition, {
-                      variant: "info",
-                    });
-                  }}
+                  className="h-[3.5rem] w-[7.5rem] lg:w-[5.625rem] border p-[4px] lg:p-[3px] flex justify-between flex-col text-sm cursor-pointer hover:border-[#37F6AE]"
                 >
                   <div className="text-xs whitespace-nowrap overflow-ellipsis overflow-hidden">
                     {term}
@@ -107,7 +109,15 @@ const GameBoard = () => {
                       ""
                     )}
                   </div>
-                  <div className="text-[13px] p-0 m-0 font-medium">{id}</div>
+                  <div className="text-[13px] p-0 m-0 font-medium flex items-center justify-between">
+                    {id}
+                    <IoIosEye
+                      className='hover:text-primary active:text-primary text-[#9f9f9f]'
+                      onClick={() => {
+                        setSelectedCell(selectedCell === null || selectedCell.term !== term ? { term, definition } : null);
+                      }}
+                    />
+                  </div>
                 </div>
               ))}
           </div>
@@ -125,6 +135,7 @@ const GameBoard = () => {
           )}
         </div>
       </div>
+
       <div className="w-fulll flex justify-center">
         <div className="flex px-[40] lg:px-[30px] bg-grad h-[7.5rem] lg:h-[5.625rem] mb-4 w-[37.5rem] lg:w-[28.125rem] justify-center mt-8 lg:mt-6 gap-6 rounded-[60px] lg:rounded-[45px]">
           <div className="flex w-full items-center justify-between">
@@ -168,6 +179,18 @@ const GameBoard = () => {
           </div>
         </div>
       </div>
+
+      {selectedCell && (
+        <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-75">
+          <div className="p-4 bg-white bg-gradient bg-cover min-h-[20rem] gap-y-4 lg:gap-y-3 flex flex-col justify-between w-[54rem] px-8 rounded-lg">
+            <h1 className="font-bold text-[32px]">{selectedCell.term}</h1>
+            <p className="text-[#4e4e4e] font-medium">{selectedCell.definition}</p>
+            <div className="w-full flex justify-end">
+              <button className="flex justify-center items-center py-2 bg-[#46cc46] w-[5rem] rounded-full" onClick={() => setSelectedCell(null)}>Got it!</button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };
