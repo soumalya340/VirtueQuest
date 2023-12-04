@@ -16,6 +16,14 @@ export const gameContent = [
     term: "Neural Network",
     definition:
       "A Neural Network is a computational model inspired by the human brain's structure and function. It consists of interconnected nodes (artificial neurons) organized in layers. Neural networks are designed to recognize patterns and features in data, making them particularly effective in tasks like image and speech recognition. Deep learning, a subset of machine learning, often involves neural networks with multiple layers (deep neural networks).",
+    question: "What is the term for a field of computer science that involves the development of intelligent machines capable of tasks requiring human intelligence?",
+    options: [
+      "Machine Learning",
+      "Neural Network",
+      "Artificial Intelligence",
+      "Deep Learning"
+    ],
+    answer: "Artificial Intelligence"
   },
   {
     id: 4,
@@ -46,6 +54,14 @@ export const gameContent = [
     term: "Algorithm",
     definition:
       "An Algorithm is a step-by-step procedure or set of rules for solving a specific problem or accomplishing a particular task. Algorithms can be expressed in various forms, including natural language, flowcharts, or computer code. They are fundamental to computer science and are used in various applications, from sorting data to optimizing complex processes.",
+    question: "Which subset of AI focuses on providing systems the ability to learn and improve from experience without being explicitly programmed?",
+    options: [
+      "Machine Learning",
+      "Supervised Learning",
+      "Unsupervised Learning",
+      "Deep Learning"
+    ],
+    answer: "Machine Learning"
   },
   {
     id: 9,
@@ -58,6 +74,14 @@ export const gameContent = [
     term: "Big Data",
     definition:
       "Big Data refers to extremely large and complex datasets that go beyond the capabilities of traditional data processing tools. These datasets are characterized by the three Vs: volume, velocity, and variety. Big Data technologies and techniques are employed to store, process, and analyze massive amounts of information, uncovering valuable insights and patterns.",
+    question: "In which type of learning is the algorithm trained on a labeled dataset?",
+    options: [
+      "Reinforcement Learning",
+      "Unsupervised Learning",
+      "Supervised Learning",
+      "Deep Learning"
+    ],
+    answer: "Supervised Learning"
   },
   {
     id: 11,
@@ -76,6 +100,14 @@ export const gameContent = [
     term: "Bias in AI",
     definition:
       "Bias in AI refers to unintended and often unfair discrimination present in the results of an AI system. This bias can arise from biased training data, biased algorithms, or both. Addressing bias in AI is crucial to ensure fair and equitable outcomes, and researchers strive to develop methods for detecting and mitigating bias in AI systems.",
+    question: "What is a computational model inspired by the human brain's structure and function?",
+    options: [
+      "Deep Learning",
+      "Artificial Intelligence",
+      "Neural Network",
+      "Machine Learning"
+    ],
+    answer: "Neural Network"
   },
   {
     id: 14,
@@ -112,6 +144,14 @@ export const gameContent = [
     term: "Blockchain",
     definition:
       "Blockchain is a decentralized, distributed ledger technology that records transactions across many computers in a secure and transparent manner. Each block in the chain contains a timestamped list of transactions, and once added, it cannot be altered retroactively without consensus from the network. Blockchain is the underlying technology for various cryptocurrencies like Bitcoin.",
+    question: "What type of machine learning involves the algorithm not being provided with labeled data?",
+    options: [
+      "Reinforcement Learning",
+      "Supervised Learning",
+      "Unsupervised Learning",
+      "Deep Learning"
+    ],
+    answer: "Unsupervised Learning"
   },
   {
     id: 20,
@@ -142,6 +182,14 @@ export const gameContent = [
     term: "Cybersecurity",
     definition:
       "Cybersecurity is the practice of protecting systems, networks, and programs from digital attacks, theft, and damage. Cybersecurity measures include the implementation of security protocols, encryption, firewalls, and threat detection systems to safeguard digital assets and sensitive information.",
+    question: "What technology superimposes computer-generated information onto the user's view of the real world?",
+    options: [
+      "Augmented Reality",
+      "Virtual Reality",
+      "Computer Vision",
+      "Machine Learning"
+    ],
+    answer: "Augmented Reality"
   },
   {
     id: 25,
@@ -160,6 +208,14 @@ export const gameContent = [
     term: "Open Source",
     definition:
       "Open Source refers to a type of software whose source code is available for modification or enhancement by anyone. Open source projects encourage collaboration, transparency, and community-driven development. Popular examples of open source software include the Linux operating system and the Apache web server.",
+    question: "In which type of learning does an agent learn how to behave in an environment by performing actions and receiving rewards or penalties?",
+    options: [
+      "Supervised Learning",
+      "Reinforcement Learning",
+      "Unsupervised Learning",
+      "Deep Learning"
+    ],
+    answer: "Reinforcement Learning"
   },
   {
     id: 28,
@@ -184,7 +240,15 @@ export const gameContent = [
     term: "Algorithmic Trading",
     definition:
       "Algorithmic Trading involves the use of algorithms and computer programs to trade financial securities automatically based on predefined criteria. These algorithms analyze market data, execute trades, and manage portfolios at speeds and frequencies beyond human capabilities. Algorithmic trading is prevalent in financial markets, contributing to liquidity and market efficiency.",
-  },
+    question: "What is a step-by-step procedure or set of rules for solving a specific problem or accomplishing a particular task?",
+    options: [
+      "Algorithm",
+      "Neural Network",
+      "Machine Learning",
+      "Artificial Intelligence"
+    ],
+    answer: "Algorithm"  
+    },
   {
     id: 32,
     term: "Fintech",
@@ -196,6 +260,14 @@ export const gameContent = [
     term: "Cryptocurrency",
     definition:
       "Cryptocurrency is a type of digital or virtual currency that relies on cryptography for security. Operating on decentralized networks built using blockchain technology, cryptocurrencies facilitate secure, transparent, and peer-to-peer transactions. Bitcoin, created in 2009, was the first decentralized cryptocurrency, and since then, numerous other cryptocurrencies, including Ethereum, Ripple, and Litecoin, have emerged.",
+    question: "What multidisciplinary field employs scientific methods, processes, algorithms, and systems to extract knowledge from structured and unstructured data?",
+    options: [
+      "Data Science",
+      "Machine Learning",
+      "Big Data",
+      "Artificial Intelligence"
+    ],
+    answer: "Data Science" 
   },
   {
     id: 34,
@@ -214,12 +286,28 @@ export const gameContent = [
     term: "Robotics",
     definition:
       "Robotics is a multidisciplinary field that involves the design, construction, operation, and use of robots. Robots are programmable machines capable of performing tasks autonomously or semi-autonomously. They find applications in various industries, including manufacturing, healthcare, exploration, and entertainment. Robotics combines elements of mechanical engineering, electronics, computer science, and artificial intelligence to create intelligent and adaptive machines.",
+    question: "Which term refers to extremely large and complex datasets that go beyond the capabilities of traditional data processing tools?",
+    options: [
+      "Big Data",
+      "Data Mining",
+      "Machine Learning",
+      "Data Science"
+    ],
+    answer: "Big Data"
   },
   {
     id: 37,
     term: "Automation",
     definition:
       "Automation involves the use of largely automatic equipment or systems to perform tasks without direct human intervention. The goal of automation is to enhance efficiency, accuracy, and productivity by delegating repetitive or hazardous tasks to machines. Industries ranging from manufacturing and logistics to finance and healthcare leverage automation to streamline processes and improve overall performance.",
+    question: "What is the process of discovering patterns and knowledge from large amounts of data?",
+    options: [
+      "Data Mining",
+      "Feature Engineering",
+      "Machine Learning",
+      "Big Data"
+    ],
+    answer: "Data Mining"
   },
   {
     id: 38,
@@ -238,6 +326,15 @@ export const gameContent = [
     term: "Distributed Ledger",
     definition:
       "A distributed ledger is a consensus of replicated, shared, and synchronized digital data spread across multiple sites, countries, or institutions. One of the most well-known implementations of distributed ledger technology is blockchain. Distributed ledgers provide a decentralized and tamper-resistant record of transactions, enhancing transparency and trust in various applications, including cryptocurrencies and supply chain management.",
+    question: "What is the process of selecting and transforming variables in a dataset to improve the performance of a machine learning model?",
+    options: [
+      "Feature Engineering",
+      "Data Science",
+      "Data Mining",
+      "Machine Learning"
+    ],
+    answer: "Feature Engineering"
+  
   },
   {
     id: 41,
@@ -256,6 +353,14 @@ export const gameContent = [
     term: "Exponential Technologies",
     definition:
       "Exponential technologies are those that grow and advance at an exponential rate, often leading to rapid and transformative changes in various industries. These technologies include artificial intelligence, biotechnology, nanotechnology, and quantum computing, among others. The exponential growth of these technologies has the potential to revolutionize industries, drive innovation, and reshape the way we live and work.",
+    question: "What does 'Bias in AI' refer to?",
+    options: [
+      "Unintended and often unfair discrimination",
+      "Fair and equitable outcomes",
+      "Transparent AI",
+      "Efficient AI"
+    ],
+    answer: "Unintended and often unfair discrimination"
   },
   {
     id: 44,
@@ -298,6 +403,14 @@ export const gameContent = [
     term: "Human-Computer Interaction (HCI)",
     definition:
       "Human-Computer Interaction (HCI) focuses on the design and use of computer systems, emphasizing the user's experience and interaction with the system. HCI combines principles from computer science, psychology, and design to create interfaces that are intuitive, efficient, and user-friendly. This field plays a crucial role in developing software, websites, and interactive systems that cater to the diverse needs and preferences of users.",
+    question: "What does 'Explainable AI (XAI)' emphasize?",
+    options: [
+      "Complex algorithms",
+      "Making AI outputs understandable and interpretable",
+      "Speed of AI computations",
+      "AI automation"
+    ],
+    answer: "Making AI outputs understandable and interpretable"
   },
   {
     id: 51,
@@ -322,6 +435,14 @@ export const gameContent = [
     term: "Exo-Skeletons",
     definition:
       "Exo-skeletons are mechanical structures worn by humans to enhance physical capabilities, often used in industries or rehabilitation. Exoskeletons support and augment the wearer's strength and endurance, providing assistance in various tasks. In industrial settings, exoskeletons reduce physical strain, while in rehabilitation, they aid individuals in regaining mobility and strength after injuries or surgeries.",
+    question: "Which field enables computers to interpret and make decisions based on visual data, such as images or videos?",
+    options: [
+      "Computer Vision",
+      "Natural Language Processing",
+      "Artificial Intelligence",
+      "Machine Learning"
+    ],
+    answer: "Computer Vision"
   },
   {
     id: 55,
@@ -346,6 +467,14 @@ export const gameContent = [
     term: "Exponential Growth",
     definition:
       "Exponential growth is a pattern of growth in which a quantity multiplies by a fixed percentage at constant intervals, leading to rapid and continuous expansion. This concept is fundamental in various fields, including technology, finance, and population dynamics. Understanding exponential growth is essential for predicting trends, planning resource allocation, and assessing the potential impact of innovations in different domains.",
+    question: "What field of AI enables computers to understand, interpret, and generate human language?",
+    options: [
+      "Natural Language Processing",
+      "Computer Vision",
+      "Artificial Intelligence",
+      "Machine Learning"
+    ],
+    answer: "Natural Language Processing"
   },
   {
     id: 59,
@@ -388,6 +517,14 @@ export const gameContent = [
     term: "Swarm Robotics",
     definition:
       "A field of robotics that studies the behavior of large groups of relatively simple robots working together to accomplish tasks. Swarm robotics draw inspiration from collective behaviors observed in social insects and aim to achieve efficient collaboration among robots.",
+    question: "What is a computer program designed to simulate conversation with human users?",
+    options: [
+      "Chatbot",
+      "Virtual Reality",
+      "Algorithm",
+      "Artificial Intelligence"
+    ],
+    answer: "Chatbot"
   },
   {
     id: 66,
@@ -418,6 +555,14 @@ export const gameContent = [
     term: "Digital Ethics",
     definition:
       "The study and promotion of responsible and ethical behavior in the use of digital technologies. Digital ethics address concerns related to privacy, security, fairness, transparency, and the societal impact of technological advancements.",
+    question: "What does 'IoT' stand for?",
+    options: [
+      "Internet of Technology",
+      "Internet of Things",
+      "Internet of Thoughts",
+      "Internet of Tricks"
+    ],
+    answer: "Internet of Things"
   },
   {
     id: 71,

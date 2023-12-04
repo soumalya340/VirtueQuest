@@ -12,10 +12,22 @@ const GameBoard = () => {
   const [playerPosition, setPlayerPosition] = useState<number>(0);
   const [isMoveDisabled, setIsMoveDisable] = useState<boolean>(true);
   const [isRollDisabled, setIsRollDisable] = useState<boolean>(false);
-  const [gameWon, setGameWon] = useState<boolean>(false);
-  const [selectedCell, setSelectedCell] = useState<{ term: string; definition: string } | null>(null);
+  const [gameWon, setGameWon] = useState<boolean>(false); 
+  const [typePost, setTypePost] = useState('');
+  const [optionClicked, setOptionClicked] = useState(null);
 
-  console.log(dieNumber, playerPosition);
+  const [selectedCell, setSelectedCell] = useState<{
+    term: string;
+    definition: string;
+  } | null>(null);
+
+  // State for displaying QuestionModal
+  const [questionModalVisible, setQuestionModalVisible] = useState<boolean>(false);
+  const [questionModalContent, setQuestionModalContent] = useState<{
+    question: string;
+    options: string[];
+    answer: string;
+  } | null>(null);
 
   const getRandomNumber = () => {
     const randomDecimal = Math.random();
@@ -33,55 +45,120 @@ const GameBoard = () => {
   };
 
   const getDieSVGUrl = (number: number) => `/${dieNumberToSVG[number]}`;
-
   
   const handleMove = () => {
-    if (dieNumber + playerPosition < 72) {
-      // Calculate the next position
+    if (!isMoveDisabled) {
+      const ladderStartPoints = [3, 8, 13, 19, 33, 36, 37, 50, 54];
+      const ladderEndPoints = [12, 16, 22, 30, 52, 44, 47, 69, 63];
+      const snakeStartPoints = [10, 27, 24, 31, 43, 40, 58, 70, 65];
+      const snakeEndPoints = [1, 9, 15, 23, 26, 30, 39, 51, 55];
+  
+      let snakeCount = 0;
+      let ladderCount = 0;
+  
       const nextPosition = dieNumber + playerPosition;
-
-      // Check if the next position is the start of a ladder
-      const ladderStartPoints = [3, 8, 13, 19, 33, 36, 37, 50];
-      const ladderEndPoints = [12, 16, 22, 30, 52, 44, 47, 69];
-
-      const ladderIndex = ladderStartPoints.indexOf(nextPosition);
-      if (ladderIndex !== -1) {
-        // Confirm with the player before climbing the ladder
-        if (window.confirm("You found a ladder! Climb up?")) {
-          setPlayerPosition(ladderEndPoints[ladderIndex]);
-        }
-      } else {
-        // Check if the next position is the start of a snake
-        const snakeStartPoints = [10, 27, 24, 31, 43, 40, 58, 70, 65];
-        const snakeEndPoints = [1, 9, 15, 23, 26, 30, 39, 51, 55];
-
-        const snakeIndex = snakeStartPoints.indexOf(nextPosition);
-        if (snakeIndex !== -1) {
-          // Confirm with the player before sliding down the snake
-          if (window.confirm("Uh-oh! You found a snake. Slide down?")) {
-            setPlayerPosition(snakeEndPoints[snakeIndex]);
-          }
-        } else {
-          // If the next position is neither a ladder nor a snake, set it normally
-          setPlayerPosition(nextPosition);
-        }
+      let eventEncountered = '';
+  
+      // Check if the player is at the starting point of a ladder or a snake
+      const isLadderStart = ladderStartPoints.includes(nextPosition);
+      const isSnakeStart = snakeStartPoints.includes(nextPosition);
+  
+      if (isLadderStart) {
+        setTypePost('ladder');
+        ladderCount += 1;
+        console.log(typePost);
+      } else if (isSnakeStart) {
+        setTypePost('snake');
+        snakeCount += 1;
+        console.log(typePost);
       }
-
-      // Add your remaining logic for disabling moves and enabling rolls
-      setTimeout(() => {
+  
+      // Get questionModalContent from GameData
+      const eventIndex = isLadderStart
+        ? ladderStartPoints.indexOf(nextPosition)
+        : isSnakeStart
+        ? snakeStartPoints.indexOf(nextPosition)
+        : -1;
+  
+      if (eventIndex !== -1) {
+        const eventContent = gameContent.find(cell => cell.id === (isLadderStart ? ladderStartPoints[eventIndex] : snakeStartPoints[eventIndex]));
+  
+        if (eventContent) {
+          setQuestionModalContent({
+            question: eventContent.question || '',
+            options: eventContent.options || [],
+            answer: eventContent.answer || '',
+          });
+        }
+  
+        // Cap playerPosition at 72
+        const newPosition = Math.min(isLadderStart ? ladderEndPoints[eventIndex] : snakeEndPoints[eventIndex], 72);
+        setPlayerPosition(newPosition);
+  
+        // Enable rolling dice after encountering a ladder or snake
         setIsMoveDisable(true);
         setIsRollDisable(false);
-      }, 500);
+  
+        // Show QuestionModal for ladder or snake
+        setQuestionModalVisible(true);
+      } else {
+        // Check if the player landed on a cell with quiz information
+        const currentCell = gameContent.find(cell => cell.id === nextPosition);
+        if (currentCell && currentCell.question && currentCell.options && currentCell.answer) {
+          eventEncountered = 'quiz';
+  
+          // Display the question modal
+          setQuestionModalContent({
+            question: currentCell.question,
+            options: currentCell.options,
+            answer: currentCell.answer,
+          });
+          setQuestionModalVisible(true);
+  
+          // Disable move and roll dice after encountering a quiz
+          setIsMoveDisable(true);
+          setIsRollDisable(true);
+        } else {
+          // Cap playerPosition at 72
+          const newPosition = Math.min(nextPosition, 72);
+          // Move the player to the next position
+          setPlayerPosition(newPosition);
+  
+          // Enable rolling dice after a move
+          setIsMoveDisable(true);
+          setIsRollDisable(false);
+  
+          // Check for winning condition
+          if (newPosition >= 72) {
+            setGameWon(true);
+            alert('You have won');
+          }
+        }
+      }
+  
+      // Display snake and ladder counts in the console
+      console.log(`Snakes encountered: ${snakeCount}`);
+      console.log(`Ladders encountered: ${ladderCount}`);
     } else {
-      setPlayerPosition(72);
-      setGameWon(true);
-      enqueueSnackbar("Congratulations!!! You won", {
-        variant: "success",
-      });
+      // Disable the move and enable rolling dice
+      setIsMoveDisable(true);
+      setIsRollDisable(false);
     }
   };
 
-
+  const handleOptionClick = (selectedOption: any) => {
+    if (selectedOption === questionModalContent?.answer) {
+      // Handle correct answer, change button color, and set timeout
+      setOptionClicked(selectedOption);
+      setTimeout(() => {
+        setQuestionModalVisible(false);
+      }, 1000);
+    } else {
+      // Handle incorrect answer if needed
+      // You can add some visual feedback or other actions
+      setOptionClicked(selectedOption);
+    }
+  };
   return (
     <>
       <div className="flex justify-center items-stretch">
@@ -191,6 +268,40 @@ const GameBoard = () => {
           </div>
         </div>
       )}
+
+      {questionModalVisible && (
+        <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-75">
+          <div className="p-4 bg-white bg-gradient bg-cover min-h-[20rem] gap-y-4 lg:gap-y-3 flex flex-col justify-between w-[54rem] px-8 rounded-lg">
+            {typePost === 'snake' ? (
+              <div className="w-full flex"><div className="p-2 px-3 bg-[#ce42428e] rounded-full">Opps! You hit a snake.</div></div>
+            ) : (
+              <div className="w-full flex"><div className="py-2 px-3 bg-[#72e23e8e] rounded-full">Yeah! Get ready to climb up a ladder.</div></div>
+            )}
+            <h1 className="font-semibold text-[20px]">{questionModalContent?.question}</h1>
+            {questionModalContent?.options.map((option, index) => (
+              <div className="w-full flex flex-start" key={index}>
+                <button
+                  onClick={() => handleOptionClick(option)}
+                  className={`cursor-pointer text-left py-2 px-4 border rounded-full mb-2 ${
+                    optionClicked === option ? (option === questionModalContent?.answer ? 'bg-[#72e23e8e]' : 'bg-[#ce42428e]') : ''
+                  }`}
+                >
+                  {option}
+                </button>
+              </div>
+            ))}
+            <div className="w-full flex justify-end">
+              <button
+                className="flex justify-center items-center py-2 px-4 bg-grad rounded-full"
+                onClick={() => setQuestionModalVisible(false)}
+              >
+                Skip
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
     </>
   );
 };
