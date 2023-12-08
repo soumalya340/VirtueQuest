@@ -10,6 +10,8 @@ import { ethers } from 'ethers';
 import virtueQuestABI from '@/abi/virtueQuest.json';
 import Lottie from 'lottie-react';
 import snake from '@/components/snake.json';
+import { Network, Alchemy } from 'alchemy-sdk';
+import { useAddress } from '@thirdweb-dev/react';
 
 let virtueQuestca = '';
 let provider: ethers.providers.Web3Provider | null = null;
@@ -24,7 +26,8 @@ const GameBoard = () => {
   const [gameWon, setGameWon] = useState<boolean>(false);
   const [typePost, setTypePost] = useState('');
   const [optionClicked, setOptionClicked] = useState(null);
-
+  //game Id
+  const [gameId, setGameId] = useState<string | null>();
   const [selectedCell, setSelectedCell] = useState<{
     term: string;
     definition: string;
@@ -39,6 +42,17 @@ const GameBoard = () => {
     answer: string;
   } | null>(null);
 
+  const address = useAddress();
+
+  // setting api key for fetching
+  const settings = {
+    apiKey: '6sIDTgwfsNMF3NtK5W3h8J52KQfX90ld',
+    network: Network.ETH_SEPOLIA,
+  };
+
+  console.log(address);
+  const alchemy = new Alchemy(settings);
+
   useEffect(() => {
     virtueQuestca = '0xE083027728dd6936aD4725fb2d0EBc0b95178326';
     if (typeof window !== 'undefined' && window.ethereum) {
@@ -51,19 +65,46 @@ const GameBoard = () => {
         signer
       );
 
-      const startGame = async () => {
-        try {
-          const start = await virtueQuestContract.startGame(2);
-          setIsLoadingGame(false);
-          alert(`Game starts with Tx: ${start?.hash}`);
-        } catch (error: any) {
-          alert(error);
-        }
-      };
+      // -----------
+      if (address) {
+        const fetchnftList = async () => {
+          try {
+            const { ownedNfts } = await alchemy.nft.getNftsForOwner(
+              `${address}`
+            );
 
-      startGame();
+            const nftList = ownedNfts;
+            console.log(nftList);
+            const _tokenID = nftList.filter(
+              (nft) =>
+                nft.contract.address ===
+                '0xD086bacC3883dC499850d964623c459f4698fB96'
+            )[0].tokenId;
+            console.log(_tokenID);
+            setGameId(_tokenID);
+          } catch (error) {
+            alert(error);
+          }
+        };
+        fetchnftList();
+
+        if (gameId) {
+          const startGame = async () => {
+            try {
+              console.log(gameId, 'ID');
+              const start = await virtueQuestContract.startGame(gameId);
+              setIsLoadingGame(false);
+              alert(`Game starts with Tx: ${start?.hash}`);
+            } catch (error: any) {
+              alert(error);
+            }
+          };
+
+          startGame();
+        }
+      }
     }
-  }, []);
+  }, [gameId, address]);
 
   console.log('virtueNftContract', virtueQuestContract);
 

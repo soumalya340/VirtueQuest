@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react';
 import nftImage from '../../../public/landing-image.png';
 import virtueQuestNFTABI from '@/abi/virtueQuestNFT.json';
 import { ethers } from 'ethers';
-import { enqueueSnackbar } from 'notistack';
 import Link from 'next/link';
+
 let nftca = '';
 let provider: ethers.providers.Web3Provider | null = null;
 let nftContract: ethers.Contract;
@@ -13,6 +13,7 @@ let nftContract: ethers.Contract;
 const Signup = () => {
   const [isMinting, setIsMinting] = useState<boolean>(false);
   const [minted, setMinted] = useState<boolean>(false);
+
   console.log(minted);
 
   useEffect(() => {
