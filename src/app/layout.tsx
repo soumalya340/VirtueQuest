@@ -31,9 +31,9 @@ export default function RootLayout({
     >
       <html lang="en">
         <body
-          className={`bg-gradient bg-cover bg-no-repeat ${inter.className}`}
+          className={`bg-gradient bg-cover bg-no-repeat px-[10rem] lg:px-[7.5rem] flex justify-between h-screen flex-col items-center ${inter.className}`}
         >
-          <div className="relative px-8 py-4 flex items-center justify-between w-full ">
+          <div className="h-[72px] lg:h-[54px] flex items-center justify-between w-full">
             <div className="flex items-center justify-center gap-x-[8px] lg:gap-x-[6px]">
               <Image
                 height={40}
@@ -59,8 +59,9 @@ export default function RootLayout({
             </div>
           </div>
 
-          <div>{children}</div>
-          <div className="fixed bottom-0 flex w-full items-center justify-between px-8 pb-4">
+          <div className=''>{children}</div>
+
+          <div className="fixed bottom-0 flex w-full items-center justify-between px-[10rem] lg:px-[7.5rem]">
             <p>Copyright © 2023 VirtueQuest</p>
             <p className="text-primary">Terms and conditions</p>
           </div>

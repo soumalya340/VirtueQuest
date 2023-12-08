@@ -5,14 +5,14 @@ import Link from 'next/link';
 const Page = () => {
   const address = useAddress();
   return (
-    <div className="px-16 mx-auto max-w-7xl mt-10">
+    <div className="mx-auto w-full">
       <div className="flex w-full items-center justify-between ">
-        <div className="">
-          <div className=" flex flex-col gap-y-6">
-            <h1 className="text-[96px] font-primary font-extrabold lg:text-[70px] leading-10 w-[680px] lg:w-[510px]">
+        <div className="flex flex-1 w-full">
+          <div className=" flex flex-col w-full gap-y-6">
+            <h1 className="text-[96px] font-primary font-extrabold lg:text-[70px] leading-10">
               Virtue<span className="text-primary font-primary">Quest </span>
             </h1>
-            <p className="text-[32px] lg:text-[20px] font-primary font-extrabold">
+            <p className="text-[32px] lg:text-[20px] font-primary w-[680px] lg:w-[510px] font-extrabold">
               Discover something new and receive an NFT to show off their
               achievement.
             </p>
@@ -26,7 +26,7 @@ const Page = () => {
             )}
           </div>
         </div>
-        <div className="">
+        <div className="flex flex-1 w-full">
           <img
             src="/landing-image.png"
             alt="landing-image"
