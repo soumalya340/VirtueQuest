@@ -16,7 +16,7 @@ let provider: ethers.providers.Web3Provider | null = null;
 let virtueQuestContract: ethers.Contract;
 
 const GameBoard = () => {
-  const [isLoadingGame, setIsLoadingGame] = useState<boolean>(true);
+  const [isLoadingGame, setIsLoadingGame] = useState<boolean>(false);
   const [dieNumber, setDieNumber] = useState<number>(0);
   const [playerPosition, setPlayerPosition] = useState<number>(0);
   const [isMoveDisabled, setIsMoveDisable] = useState<boolean>(true);
@@ -340,7 +340,7 @@ const GameBoard = () => {
       </div>
 
       {selectedCell && (
-        <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-75">
+        <div className="fixed top-0 left-0 z-50 bg-cover min-h-screen right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-75">
           <div className="p-4 bg-white bg-gradient bg-cover min-h-[20rem] gap-y-4 lg:gap-y-3 flex flex-col justify-between w-[54rem] px-8 rounded-lg">
             <h1 className="font-bold text-[32px]">{selectedCell.term}</h1>
             <p className="text-[#4e4e4e] font-medium">
@@ -359,7 +359,7 @@ const GameBoard = () => {
       )}
 
       {questionModalVisible && (
-        <div className="absolute top-0 h-full left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-75 z-[999999]">
+        <div className="fixed top-0 inset-0 h-full left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-75 z-[999999]">
           <div className="p-4 bg-white bg-gradient bg-cover min-h-[20rem] gap-y-4 lg:gap-y-3 flex flex-col justify-between w-[54rem] px-8 rounded-lg">
             {typePost === 'snake' ? (
               <div className="w-full flex">
