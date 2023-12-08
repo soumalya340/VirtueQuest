@@ -16,7 +16,7 @@ let provider: ethers.providers.Web3Provider | null = null;
 let virtueQuestContract: ethers.Contract;
 
 const GameBoard = () => {
-  const [isLoadingGame, setIsLoadingGame] = useState<boolean>(false);
+  const [isLoadingGame, setIsLoadingGame] = useState<boolean>(true);
   const [dieNumber, setDieNumber] = useState<number>(0);
   const [playerPosition, setPlayerPosition] = useState<number>(0);
   const [isMoveDisabled, setIsMoveDisable] = useState<boolean>(true);
