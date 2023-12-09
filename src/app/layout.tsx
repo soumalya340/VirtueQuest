@@ -1,6 +1,6 @@
 'use client';
 
-import './globals.css';
+import Head from 'next/head';
 import { Inter } from 'next/font/google';
 import {
   ThirdwebProvider,
@@ -10,15 +10,11 @@ import {
   useAddress,
 } from '@thirdweb-dev/react';
 
-const inter = Inter({ subsets: ['latin'] });
-
-export const metadata = {
-  title: 'VirtueQuest',
-  description: 'An app where users are able to discover something new and receive an NFT to show off their achievement.',
-}
-
 import { ConnectWallet, lightTheme } from '@thirdweb-dev/react';
 import Image from 'next/image';
+
+const inter = Inter({ subsets: ['latin'] });
+
 export default function RootLayout({
   children,
 }: {
@@ -35,6 +31,13 @@ export default function RootLayout({
       ]}
     >
       <html lang="en">
+        <Head>
+          <title>VirtueQuest</title>
+          <meta
+            name="description"
+            content="An app where users are able to discover something new and receive an NFT to show off their achievement."
+          />
+        </Head>
         <body
           className={`bg-gradient bg-cover py-2 bg-no-repeat w-full min-h-screen flex justify-between h-screen flex-col items-center ${inter.className}`}
         >
