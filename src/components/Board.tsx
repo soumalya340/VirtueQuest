@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { gameContent } from '@/lib/GameData';
 import Button from './Button';
 import { IoIosEye } from 'react-icons/io';
-import profile from '../../public/profile.png';
+import profile from '../../public/profile.jpg';
 import Image from 'next/image';
 import { ethers } from 'ethers';
 import virtueQuestABI from '@/abi/virtueQuest.json';
@@ -351,8 +351,8 @@ const GameBoard = () => {
                 {isRollDisabled ? (
                   <Image
                     src={getDieSVGUrl(dieNumber)}
-                    width={16}
-                    height={16}
+                    width={24}
+                    height={24}
                     // className="w-[64px] h-[64px]"
                     alt="die-icon"
                   />
