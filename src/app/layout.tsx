@@ -12,6 +12,11 @@ import {
 
 const inter = Inter({ subsets: ['latin'] });
 
+export const metadata = {
+  title: 'VirtueQuest',
+  description: 'An app where users are able to discover something new and receive an NFT to show off their achievement.',
+}
+
 import { ConnectWallet, lightTheme } from '@thirdweb-dev/react';
 import Image from 'next/image';
 export default function RootLayout({
