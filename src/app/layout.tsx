@@ -70,7 +70,7 @@ export default function RootLayout({
 
           <div className='w-full'>{children}</div>
 
-          <div className="fixed bottom-0 flex w-full items-center justify-between px-[10rem] lg:px-[7.5rem]">
+          <div className="fixed bottom-0 text-[12px] flex w-full items-center justify-between px-[10rem] lg:px-[7.5rem]">
             <p>Copyright © 2023 VirtueQuest</p>
             <p className="text-primary">Terms and conditions</p>
           </div>

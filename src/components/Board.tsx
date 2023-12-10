@@ -12,6 +12,8 @@ import Lottie from 'lottie-react';
 import snake from '@/components/snake.json';
 import { Network, Alchemy } from 'alchemy-sdk';
 import { useAddress } from '@thirdweb-dev/react';
+import CongratulationsModal from './CongratulationsModal';
+import { useRouter } from 'next/navigation';
 
 let virtueQuestca = '';
 let provider: ethers.providers.Web3Provider | null = null;
@@ -32,6 +34,8 @@ const GameBoard = () => {
     term: string;
     definition: string;
   } | null>(null);
+  const [snakeCount, setSnakeCount] = useState<number>(0);
+  const [ladderCount, setLadderCount] = useState<number>(0);
 
   // State for displaying QuestionModal
   const [questionModalVisible, setQuestionModalVisible] =
@@ -41,6 +45,7 @@ const GameBoard = () => {
     options: string[];
     answer: string;
   } | null>(null);
+  const router = useRouter();
 
   const address = useAddress();
 
@@ -106,8 +111,6 @@ const GameBoard = () => {
     }
   }, [gameId, address]);
 
-  console.log('virtueNftContract', virtueQuestContract);
-
   if (isLoadingGame) {
     return (
       <>
@@ -148,9 +151,6 @@ const GameBoard = () => {
       const snakeStartPoints = [10, 27, 24, 31, 43, 40, 58, 70, 65];
       const snakeEndPoints = [1, 9, 15, 23, 26, 30, 39, 51, 55];
 
-      let snakeCount = 0;
-      let ladderCount = 0;
-
       const nextPosition = dieNumber + playerPosition;
       let eventEncountered = '';
 
@@ -160,12 +160,10 @@ const GameBoard = () => {
 
       if (isLadderStart) {
         setTypePost('ladder');
-        ladderCount += 1;
-        console.log(typePost);
+        setLadderCount((prevCount) => prevCount + 1);
       } else if (isSnakeStart) {
         setTypePost('snake');
-        snakeCount += 1;
-        console.log(typePost);
+        setSnakeCount((prevCount) => prevCount + 1);
       }
 
       // Get questionModalContent from GameData
@@ -244,14 +242,9 @@ const GameBoard = () => {
           // Check for winning condition
           if (newPosition >= 72) {
             setGameWon(true);
-            alert('You have won');
           }
         }
       }
-
-      // Display snake and ladder counts in the console
-      console.log(`Snakes encountered: ${snakeCount}`);
-      console.log(`Ladders encountered: ${ladderCount}`);
     } else {
       // Disable the move and enable rolling dice
       setIsMoveDisable(true);
@@ -445,6 +438,8 @@ const GameBoard = () => {
           </div>
         </div>
       )}
+
+      {gameWon && <CongratulationsModal onClose={() => {router.push('/mint')}} snakesNumber={snakeCount} laddersNumber={ladderCount} />}
     </>
   );
 };
