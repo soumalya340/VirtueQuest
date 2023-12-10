@@ -44,7 +44,7 @@ const CongratulationsModal: React.FC<CongratulationsModalProps> = ({ onClose, sn
           <h1 className='font-primary font-semibold'>You had <span className='text-primary font-extrabold'>{snakesNumber}</span> snakes and <span className='text-primary font-extrabold'>{laddersNumber}</span> Ladders</h1>
         </div>
 
-        <p className='text-[12px]'>We will be sending an nft to you address, please be patient.</p>
+        <p className='text-[12px]'>We will be sending an nft to your address, please be patient.</p>
 
         <button className="bg-grad hover:bg-gradtrans text-white px-4 py-2 rounded-full" onClick={onClose}>
           Play again
